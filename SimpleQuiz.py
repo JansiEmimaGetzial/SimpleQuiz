@@ -1,0 +1,108 @@
+def new_game():
+    guesses = []
+    correct_guesses = 0
+    question_no = 1
+
+    for key in questions:
+        print("----------------------")
+        print(key)
+        for i in choices[question_no-1]:
+            print(i)
+        guess = input("Enter the Choice (A , B , C , D ): ")
+        guess = guess.upper()
+        guesses.append(guess)
+        correct_guesses += check_answer(questions.get(key),guess)
+        question_no = question_no + 1
+
+    display_score(correct_guesses,guesses)
+
+
+def check_answer(answer,guess):
+    if answer == guess:
+        print("CORRECT!")
+        return 1
+    else:
+        print("WRONG!")
+        return 0
+    
+def display_score(correct_guesses,guesses):
+    print("---------------------")
+    print("RESULTS")
+    print("---------------------")
+
+    print("Answers :", end= " ")
+    for i in questions:
+        print(questions.get(i), end=" ")
+    print()
+
+    print("Guesses :", end=" ")
+    for i in guesses:
+        print(i, end=" ")
+    print()
+
+    score= int((correct_guesses/len(questions))*100)
+    print("Your Score is :" +str(score) +"%")
+
+    if score >= 40:
+        print("You passed the Quiz")
+    else:
+        print("You Failed the Quiz")
+
+    
+
+
+def play_again():
+    response = input("Do you want to play again? (Yes / No) :")
+    response = response.upper()
+
+    if response == "YES":
+        return True
+    else:
+        return False
+
+
+questions = {
+    "1.Who was the father of computer?" : "A",
+    "2.Which electronics component is used in first generation computers?" : "C",
+    "3.Which part of the computer is considered as Brain of the Computer?" : "B",
+    "4.Joystick is ?" : "A",
+    "5.What is the full form of CPU?" : "D",
+    "6.What is the full form of CRT?" : "D",
+    "7.Daisy Wheel term belongs to?" : "A",
+    "8.Which can be the input and output devices both?" : "B",
+    "9.One Nibble has?" : "B",
+    "10.What does an Operating System do?" : "D"
+
+}
+
+choices = [["A. Charles Babbage","B. Dennis Ritchie","C. Charlie Babbage","D. Ken Thompson"],
+          ["A. Transistors", "B. ULSI Chips", "C. Vacuum Tubes","D. LSI Chips"],
+          ["A. Random Access Memory","B. Central Processing Unit","C. Read Only Memory","D. Hard Disk"],
+          ["A. An input device","B. An output device","C. An online game","D. A memory unit"],
+          ["A. Central Process Unit","B. Central Progressive Unit","C. Central Programming Unit","D. Central Processing Unit"],
+          ["A. Central Read Technique","B. Common Reading Technique","C. Cathode Rays Technique","D. Cathode Rays Tube"],
+          ["A. Printer","B. Plotter","C. Monitor","D. Scanner"],
+          ["A. Scanner","B. Touch screen monitor","C. Speaker","D. Digitizer"],
+          ["A. 2 Bits","B. 4 Bits","C. 8 Bits","D. 16 Bits"],
+          ["A. Memory Management","B. File Management","C. Application Management","D. All of the above"]]
+          
+        
+
+
+print("Welcome to my Simple Computer Quiz!")
+
+play=input("Do you want to start the Quiz? (Yes/No) :")
+play = play.upper()
+if play == "YES":
+    print("Okay lets go!")
+    new_game()
+
+while play_again():
+    new_game()
+
+
+if play == "NO":
+    print("Hope to see you another time! ")
+    quit()
+
+print("Thanks for attending the Quiz! Byeee!")
